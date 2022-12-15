@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A layout element must be present at the root of this file
+ in order to use data binding -->
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".NotesFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="dev.jameshill.simplenotes.vm.NotesViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- The editText element will be used to enter a note -->
+        <EditText
+            android:id="@+id/note_text_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="Enter a short note."
+            android:text="@={viewModel.newNote}"/>
+
+        <!-- The button will activate the process to save the note -->
+        <Button
+            android:id="@+id/save_note_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Save Note"
+            android:onClick="@{ () -> viewModel.addNote()}"
+
+            />
+
+        <!-- The recycler View will be used to display a list of notes held in the database. -->
+        <androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/notes_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="top"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+    </LinearLayout>
+
+</layout>
